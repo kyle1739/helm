@@ -1,0 +1,21 @@
+controller:
+  hostNetwork: true
+  daemonset:
+    useHostPort: false
+    hostPorts:
+      http: 80
+      https: 443
+  service:
+    type: ClusterIP    
+  tolerations:
+    - operator: "Exists"
+  nodeSelector:
+    kubernetes.io/hostname: master0
+
+defaultBackend:
+  tolerations:
+    - operator: "Exists" 
+  nodeSelector:
+    kubernetes.io/hostname: master0
+
+

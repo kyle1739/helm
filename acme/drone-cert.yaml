@@ -1,0 +1,25 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: drone-drone
+  namespace: kube-ops
+  spec:
+    secretName: drone-drone-tls
+    issuerRef:
+      name: letsencrypt
+      kind: ClusterIssuer
+  commonName: drone.qikqiak.com
+  dnsNames:
+  - drone.qikqiak.com
+  acme:
+    config:
+    - http01:
+        ingress: drone-drone-tls
+      domains:
+      - drone.qikqiak.com
+
+
+
+
+
+

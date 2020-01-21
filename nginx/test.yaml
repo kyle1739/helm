@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      app: my-nginx
+  template:
+    metadata:
+      labels:
+        app: my-nginx
+    spec:
+      containers:
+      - name: my-nginx
+        image: nginx:1.7.9
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        - name: https
+          containerPort: 443
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+  labels:
+    app: my-nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: my-nginx
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-nginx
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+  - host: ngdemo.qikqiak.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-nginx
+          servicePort: 443
+  tls:
+  - hosts:
+    - ngdemo.qikqiak.com
+    secretName: ngdemo-tls
+  

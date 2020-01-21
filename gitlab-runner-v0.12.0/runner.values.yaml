@@ -1,0 +1,48 @@
+image: gitlab/gitlab-runner:alpine-v12.1.0
+imagePullPolicy: IfNotPresent
+gitlabUrl: http://gitlab.solartninc.com/
+runnerRegistrationToken: "R6iSzt2fxa7e3FfRcZaj"
+unregisterRunners: true
+terminationGracePeriodSeconds: 3600
+concurrent: 10
+checkInterval: 30
+rbac:
+  create: true
+  clusterWideAccess: false
+metrics:
+  enabled: true
+  listenPort: 9090
+runners: 
+  image: ubuntu:18.04
+  imagePullSecrets:
+    - name: harbor
+  locked: false
+  tags: "k8s"
+  runUntagged: true
+  privileged: true
+  pollTimeout: 180
+  outputLimit: 4096
+  cache: {}
+  builds: {}
+  services: {}
+  helpers: {}
+resources:
+   limits:
+     memory: 2048Mi
+   requests:
+     memory: 128Mi
+     cpu: 200m
+affinity: {}
+nodeSelector: {}
+tolerations: []
+hostAliases:
+   - ip: "192.168.20.9"
+     hostnames:
+     - "gitlab.solartninc.com"
+podAnnotations: {}
+
+
+
+
+
+
