@@ -1,0 +1,38 @@
+service:
+  type: NodePort
+  nodePort: 31111
+  externalTrafficPolicy: Cluster
+env:
+  open:
+    DISABLE_API: false
+    ALLOW_OVERWRITE: true
+    STORAGE: local
+    #  secret:
+    #    BASIC_AUTH_USER: admin      
+    #    BASIC_AUTH_PASS: Aa123456
+resources:
+  limits:
+    cpu: 1
+    memory: 2Gi
+  requests:
+    cpu: 80m
+    memory: 64Mi
+persistence:
+  enabled: true
+  existingClaim: chartmuseumpvc
+
+  #ingress:
+  #  enabled: true
+  #  annotations:
+  #    kubernetes.io/ingress.class: nginx 
+  #  hosts:
+  #  - name: chart.example.choerodon.io
+  #    path: /
+
+securityContext:
+  runAsUser: 0
+  fsGroup: 0
+
+
+
+

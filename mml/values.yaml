@@ -6,8 +6,8 @@ replicaCount: 1
 
 image:
   repository: 192.168.20.172/kyle/mml
-  pullPolicy: Always
-  tag: latest
+  pullPolicy: IfNotPresent
+  tag: 3.0.1
 
 imagePullSecrets:
   - name: harbor

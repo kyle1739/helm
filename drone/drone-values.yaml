@@ -1,0 +1,41 @@
+#ingress:
+#  enabled: true
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+#  hosts:
+#    - drone.qikqiak.com
+#  tls:
+#    - secretName: drone-tls
+#      hosts:
+#        - drone.qikqiak.com
+service:
+  httpPort: 80
+  nodePort: 32222
+  type: NodePort
+
+sourceControl:
+  provider: gitlab
+  gitlab:
+    clientID: be61ae9dff413787a81a207e4a6bd46ebe0f813f1c0d84a2175d1a93fdf0834d
+    clientSecretKey: clientSecret
+    clientSecretValue: 251adabab86f8f8eed7b6c2c8b742c739e45a9d87661e951b0a8e46c098e6858
+    server: http://192.168.20.9
+server:
+  host: 192.168.20.173:32222
+  adminUser: kyle.tong
+  kubernetes:
+    enabled: true
+persistence:
+  enabled: true
+  existingClaim: dronepvc
+
+
+
+
+
+
+
+
+
+
+
